@@ -7,47 +7,54 @@ $(function() {
     height: "auto",
     width: "100%",
 
-    sorting: true,
     filtering: true,
     inserting: true,
+    editing: true,
+    sorting: true,
     paging: true,
     autoload: true,
+    pageSize: 10,
+    deleteConfirm: function(item) {
+      return item.name + " will be removed. Are you sure?";
+    },
 
     controller: {
-      loadData: function(filter) {
+      loadData: function() {
         var d = $.Deferred();
 
         $.ajax({
           url: "/configuration_detail_types",
-          dataType: "json",
-          data: filter
+          dataType: "json"
         }).done(function(response) {
           d.resolve(response.value);
         });
 
         return d.promise();
-      }
-    },
-    insertItem: function(item) {
+      },
+      insertItem: function(item) {
+        return $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "/configuration_detail_types",
+          data: item
+        });
+      },
+      updateItem: function(item) {
+        return $.ajax({
+          type: "PUT",
+          dataType: "json",
+          url: "/configuration_detail_types/" + item.id,
+          data: item
+        });
+      },
 
-          console.log(item);
-      return $.ajax({
-        type: "POST",
-        url: "/configuration_detail_types",
-        data: item,
-        dataType: "json"
-      }).done(function() {
-        console.log("insertion completed");
-      });
+      deleteItem: function(item) {
+        return $.ajax({
+          type: "DELETE",
+          url: "/configuration_detail_types/" + item.id
+        });
+      },
 
-    },
-
-    deleteItem: function(item) {
-      console.log(item);
-
-    },
-    editItem: function(item) {
-      console.log(item);
 
     },
     fields: [
@@ -56,6 +63,7 @@ $(function() {
       { type: "control" }
 
     ]
+
   });
 
 });

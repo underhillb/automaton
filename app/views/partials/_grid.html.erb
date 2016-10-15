@@ -1,0 +1,70 @@
+<div id="jsGrid"></div>
+
+<script>
+$(function() {
+
+  $("#jsGrid").jsGrid({
+    height: "auto",
+    width: "100%",
+
+    filtering: true,
+    inserting: true,
+    editing: true,
+    sorting: true,
+    paging: true,
+    autoload: true,
+    pageSize: 10,
+    deleteConfirm: function(item) {
+      return item.name + " will be removed. Are you sure?";
+    },
+
+    controller: {
+      loadData: function() {
+        var d = $.Deferred();
+
+        $.ajax({
+          url: "<%=ajax_url%>",
+          dataType: "json"
+        }).done(function(response) {
+          d.resolve(response.value);
+        });
+
+        return d.promise();
+      },
+      insertItem: function(item) {
+        return $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "<%=ajax_url%>",
+          data: item
+        });
+      },
+      updateItem: function(item) {
+        return $.ajax({
+          type: "PUT",
+          dataType: "json",
+          url: "<%=ajax_url%>/" + item.id,
+          data: item
+        });
+      },
+
+      deleteItem: function(item) {
+        return $.ajax({
+          type: "DELETE",
+          url: "<%=ajax_url%>/" + item.id
+        });
+      },
+
+
+    },
+    fields: [
+      { name: "name", type: "text" },
+      { name: "description", type: "textarea", width: 150 },
+      { type: "control" }
+
+    ]
+
+  });
+
+});
+</script>

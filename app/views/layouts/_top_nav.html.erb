@@ -7,14 +7,14 @@
         <span class="icon-bar">fgfg</span>
         <span class="icon-bar">cccc</span>
       </button>
-      <a class="navbar-brand" href="#">Automaton</a>
+      <a class="navbar-brand" href="<%=root_path%>">Automaton</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
         <li >
-          <a href="#">Blueprints</a>
+          <a href="<%=blueprints_path%>">Blueprints</a>
         </li>
         <li>
           <a href="#">Instances</a>
@@ -25,9 +25,8 @@
         <li>
           <a href="#">Instances</a>
         </li>
-        <li>
-          <%= link_to "configuration detail types", configuration_detail_types_path %>
-        </li>
+        <%= render 'layouts/top_nav_advance' %>
+
 
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.full_name%> <span class="caret"></span></a>
