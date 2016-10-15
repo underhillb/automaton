@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  configuration_template: one
+  configuration_detail_type: one
+  configuration_detail_order: 1
+  configuration_detail_data: MyString
+
+two:
+  configuration_template: two
+  configuration_detail_type: two
+  configuration_detail_order: 1
+  configuration_detail_data: MyString

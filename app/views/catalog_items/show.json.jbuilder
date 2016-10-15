@@ -1,0 +1,1 @@
+json.partial! "catalog_items/catalog_item", catalog_item: @catalog_item

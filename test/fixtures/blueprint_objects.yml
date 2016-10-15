@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  object_type: one
+  catalog_item: one
+  blueprint: one
+  name: MyString
+  description: MyText
+  version: 1
+
+two:
+  object_type: two
+  catalog_item: two
+  blueprint: two
+  name: MyString
+  description: MyText
+  version: 1

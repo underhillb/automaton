@@ -1,0 +1,1 @@
+json.array! @configuration_templates, partial: 'configuration_templates/configuration_template', as: :configuration_template

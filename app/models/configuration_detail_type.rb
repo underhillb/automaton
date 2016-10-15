@@ -1,0 +1,2 @@
+class ConfigurationDetailType < ApplicationRecord
+end

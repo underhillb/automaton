@@ -1,0 +1,1 @@
+json.partial! "configuration_templates/configuration_template", configuration_template: @configuration_template

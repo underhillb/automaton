@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  configuration_template: one
+  version: 1
+  file_content: MyText
+
+two:
+  configuration_template: two
+  version: 1
+  file_content: MyText

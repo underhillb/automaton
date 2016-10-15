@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Configuration Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configuration template</th>
+      <th>Configuration detail type</th>
+      <th>Configuration detail order</th>
+      <th>Configuration detail data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @configuration_details.each do |configuration_detail| %>
+      <tr>
+        <td><%= configuration_detail.configuration_template %></td>
+        <td><%= configuration_detail.configuration_detail_type %></td>
+        <td><%= configuration_detail.configuration_detail_order %></td>
+        <td><%= configuration_detail.configuration_detail_data %></td>
+        <td><%= link_to 'Show', configuration_detail %></td>
+        <td><%= link_to 'Edit', edit_configuration_detail_path(configuration_detail) %></td>
+        <td><%= link_to 'Destroy', configuration_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Configuration Detail', new_configuration_detail_path %>

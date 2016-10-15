@@ -1,0 +1,1 @@
+json.partial! "blueprint_objects/blueprint_object", blueprint_object: @blueprint_object

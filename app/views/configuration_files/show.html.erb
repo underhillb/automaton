@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Configuration template:</strong>
+  <%= @configuration_file.configuration_template %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @configuration_file.version %>
+</p>
+
+<p>
+  <strong>File content:</strong>
+  <%= @configuration_file.file_content %>
+</p>
+
+<%= link_to 'Edit', edit_configuration_file_path(@configuration_file) %> |
+<%= link_to 'Back', configuration_files_path %>

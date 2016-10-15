@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @configuration_detail_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @configuration_detail_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_configuration_detail_type_path(@configuration_detail_type) %> |
+<%= link_to 'Back', configuration_detail_types_path %>

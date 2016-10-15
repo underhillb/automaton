@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @configuration_template.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @configuration_template.description %>
+</p>
+
+<p>
+  <strong>Blueprint objects:</strong>
+  <%= @configuration_template.blueprint_objects %>
+</p>
+
+<%= link_to 'Edit', edit_configuration_template_path(@configuration_template) %> |
+<%= link_to 'Back', configuration_templates_path %>

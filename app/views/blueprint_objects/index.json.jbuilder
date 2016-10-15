@@ -1,0 +1,1 @@
+json.array! @blueprint_objects, partial: 'blueprint_objects/blueprint_object', as: :blueprint_object

@@ -1,0 +1,1 @@
+json.array! @configuration_files, partial: 'configuration_files/configuration_file', as: :configuration_file

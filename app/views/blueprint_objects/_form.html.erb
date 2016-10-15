@@ -1,0 +1,16 @@
+<%= simple_form_for(@blueprint_object) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :object_type %>
+    <%= f.association :catalog_item %>
+    <%= f.association :blueprint %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :version %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

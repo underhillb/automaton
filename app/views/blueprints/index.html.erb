@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Blueprints</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Version</th>
+      <th>User</th>
+      <th>Group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blueprints.each do |blueprint| %>
+      <tr>
+        <td><%= blueprint.name %></td>
+        <td><%= blueprint.description %></td>
+        <td><%= blueprint.version %></td>
+        <td><%= blueprint.user %></td>
+        <td><%= blueprint.group %></td>
+        <td><%= link_to 'Show', blueprint %></td>
+        <td><%= link_to 'Edit', edit_blueprint_path(blueprint) %></td>
+        <td><%= link_to 'Destroy', blueprint, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blueprint', new_blueprint_path %>

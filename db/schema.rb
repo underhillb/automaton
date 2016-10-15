@@ -10,7 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015000602) do
+ActiveRecord::Schema.define(version: 20161015103512) do
+
+  create_table "blueprint_objects", force: :cascade do |t|
+    t.integer  "object_type_id"
+    t.integer  "catalog_item_id"
+    t.integer  "blueprint_id"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "version"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["blueprint_id"], name: "index_blueprint_objects_on_blueprint_id"
+    t.index ["catalog_item_id"], name: "index_blueprint_objects_on_catalog_item_id"
+    t.index ["object_type_id"], name: "index_blueprint_objects_on_object_type_id"
+  end
+
+  create_table "blueprints", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "version"
+    t.integer  "user_id"
+    t.string   "group"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_blueprints_on_user_id"
+  end
+
+  create_table "catalog_items", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "configuration_detail_types", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "configuration_details", force: :cascade do |t|
+    t.integer  "configuration_template_id"
+    t.integer  "configuration_detail_type_id"
+    t.integer  "configuration_detail_order"
+    t.text     "configuration_detail_data"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["configuration_detail_type_id"], name: "index_configuration_details_on_configuration_detail_type_id"
+    t.index ["configuration_template_id"], name: "index_configuration_details_on_configuration_template_id"
+  end
+
+  create_table "configuration_files", force: :cascade do |t|
+    t.integer  "configuration_template_id"
+    t.integer  "version"
+    t.text     "file_content"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["configuration_template_id"], name: "index_configuration_files_on_configuration_template_id"
+  end
+
+  create_table "configuration_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "blueprint_objects_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["blueprint_objects_id"], name: "index_configuration_templates_on_blueprint_objects_id"
+  end
+
+  create_table "object_types", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

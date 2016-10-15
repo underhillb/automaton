@@ -1,0 +1,14 @@
+<%= simple_form_for(@configuration_detail) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :configuration_template %>
+    <%= f.association :configuration_detail_type %>
+    <%= f.input :configuration_detail_order %>
+    <%= f.input :configuration_detail_data %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

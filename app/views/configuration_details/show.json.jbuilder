@@ -1,0 +1,1 @@
+json.partial! "configuration_details/configuration_detail", configuration_detail: @configuration_detail

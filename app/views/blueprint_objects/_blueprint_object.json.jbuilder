@@ -1,0 +1,2 @@
+json.extract! blueprint_object, :id, :object_type_id, :catalog_item_id, :blueprint_id, :name, :description, :version, :created_at, :updated_at
+json.url blueprint_object_url(blueprint_object, format: :json)

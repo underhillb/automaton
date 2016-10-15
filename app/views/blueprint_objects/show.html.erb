@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Object type:</strong>
+  <%= @blueprint_object.object_type %>
+</p>
+
+<p>
+  <strong>Catalog item:</strong>
+  <%= @blueprint_object.catalog_item %>
+</p>
+
+<p>
+  <strong>Blueprint:</strong>
+  <%= @blueprint_object.blueprint %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @blueprint_object.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @blueprint_object.description %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @blueprint_object.version %>
+</p>
+
+<%= link_to 'Edit', edit_blueprint_object_path(@blueprint_object) %> |
+<%= link_to 'Back', blueprint_objects_path %>

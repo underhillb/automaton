@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Configuration template:</strong>
+  <%= @configuration_detail.configuration_template %>
+</p>
+
+<p>
+  <strong>Configuration detail type:</strong>
+  <%= @configuration_detail.configuration_detail_type %>
+</p>
+
+<p>
+  <strong>Configuration detail order:</strong>
+  <%= @configuration_detail.configuration_detail_order %>
+</p>
+
+<p>
+  <strong>Configuration detail data:</strong>
+  <%= @configuration_detail.configuration_detail_data %>
+</p>
+
+<%= link_to 'Edit', edit_configuration_detail_path(@configuration_detail) %> |
+<%= link_to 'Back', configuration_details_path %>

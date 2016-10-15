@@ -1,0 +1,2 @@
+module BlueprintObjectsHelper
+end

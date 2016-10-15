@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Configuration Templates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Blueprint objects</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @configuration_templates.each do |configuration_template| %>
+      <tr>
+        <td><%= configuration_template.name %></td>
+        <td><%= configuration_template.description %></td>
+        <td><%= configuration_template.blueprint_objects %></td>
+        <td><%= link_to 'Show', configuration_template %></td>
+        <td><%= link_to 'Edit', edit_configuration_template_path(configuration_template) %></td>
+        <td><%= link_to 'Destroy', configuration_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Configuration Template', new_configuration_template_path %>

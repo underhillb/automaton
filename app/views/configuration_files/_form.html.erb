@@ -1,0 +1,13 @@
+<%= simple_form_for(@configuration_file) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :configuration_template %>
+    <%= f.input :version %>
+    <%= f.input :file_content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

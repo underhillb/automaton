@@ -1,0 +1,1 @@
+json.array! @catalog_items, partial: 'catalog_items/catalog_item', as: :catalog_item
