@@ -13,12 +13,22 @@
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
-        <li class="active">
+        <li >
           <a href="#">Blueprints</a>
         </li>
         <li>
           <a href="#">Instances</a>
         </li>
+        <li>
+          <a href="#">Instances</a>
+        </li>
+        <li>
+          <a href="#">Instances</a>
+        </li>
+        <li>
+          <%= link_to "configuration detail types", configuration_detail_types_path %>
+        </li>
+
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.full_name%> <span class="caret"></span></a>
   <ul class="dropdown-menu">

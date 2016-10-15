@@ -1,29 +1,55 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Configuration Detail Types</h1>
+    <script>
+        $(function() {
+            $("#jsGrid").jsGrid({
+                height: "80%",
+                width: "100%",
+                filtering: true,
+                inserting: true,
+                editing: true,
+                sorting: true,
+                paging: true,
+                autoload: true,
+                pageSize: 10,
+                pageButtonCount: 5,
+                deleteConfirm: "Do you really want to delete client?",
+                controller: {
+                    loadData: function(filter) {
+                        return $.ajax({
+                            type: "GET",
+                            url: "/configuration_detail_types",
+                            data: filter
+                        });
+                    },
+                    insertItem: function(item) {
+                        return $.ajax({
+                            type: "POST",
+                            url: "/clients",
+                            data: item
+                        });
+                    },
+                    updateItem: function(item) {
+                        return $.ajax({
+                            type: "PUT",
+                            url: "/clients/" + item.id,
+                            data: item
+                        });
+                    },
+                    deleteItem: function(item) {
+                        return $.ajax({
+                            type: "DELETE",
+                            url: "/clients/" + item.id
+                        });
+                    }
+                },
+                fields: [
+                    { name: "name", type: "text", width: 150 },
+                    { name: "description", type: "text", width: 200 },
+                ]
+            });
+        });
+    </script>
+fd;lkfg;l;l
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @configuration_detail_types.each do |configuration_detail_type| %>
-      <tr>
-        <td><%= configuration_detail_type.name %></td>
-        <td><%= configuration_detail_type.description %></td>
-        <td><%= link_to 'Show', configuration_detail_type %></td>
-        <td><%= link_to 'Edit', edit_configuration_detail_type_path(configuration_detail_type) %></td>
-        <td><%= link_to 'Destroy', configuration_detail_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Configuration Detail Type', new_configuration_detail_type_path %>
+<div id="jsGrid"></div>
+fd;lkfg;l;l

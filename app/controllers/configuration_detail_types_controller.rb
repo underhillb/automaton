@@ -4,7 +4,12 @@ class ConfigurationDetailTypesController < ApplicationController
   # GET /configuration_detail_types
   # GET /configuration_detail_types.json
   def index
-    @configuration_detail_types = ConfigurationDetailType.all
+    data=ConfigurationDetailType.all
+    .where("name LIKE ?", "%#{params[:name]}%")
+    .where("description LIKE ?", "%#{params[:description]}%")
+    render json: {'value' => data}
+    #.where("name LIKE ?", "%#{params[:name]}%")
+
   end
 
   # GET /configuration_detail_types/1
@@ -24,17 +29,13 @@ class ConfigurationDetailTypesController < ApplicationController
   # POST /configuration_detail_types
   # POST /configuration_detail_types.json
   def create
-    @configuration_detail_type = ConfigurationDetailType.new(configuration_detail_type_params)
+    data = ConfigurationDetailType.new(name: params[:name], description: params[:description])
+    puts "******************************************"
 
-    respond_to do |format|
-      if @configuration_detail_type.save
-        format.html { redirect_to @configuration_detail_type, notice: 'Configuration detail type was successfully created.' }
-        format.json { render :show, status: :created, location: @configuration_detail_type }
-      else
-        format.html { render :new }
-        format.json { render json: @configuration_detail_type.errors, status: :unprocessable_entity }
-      end
-    end
+    puts params.inspect
+    puts "******************************************"
+     data.save
+     render json: data
   end
 
   # PATCH/PUT /configuration_detail_types/1
