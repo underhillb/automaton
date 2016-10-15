@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Automaton</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style type="text/css">
+   body { background: #f9f2ec !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+
+</head>
+
+<body>
+
+    <%= render 'layouts/top_nav' %>
+
+    <%= yield %>
+
+</body>
+</html>
