@@ -5,6 +5,30 @@ class BlueprintsController < ApplicationController
   # GET /blueprints.json
   def index
     @blueprints = Blueprint.all
+    respond_to do |format|
+      format.html
+      format.json {
+        blueprints=Blueprint.all
+        .where("name LIKE ?", "%#{params[:name]}%")
+        .where("description LIKE ?", "%#{params[:description]}%").includes(:blueprint_objects)
+        data=[]
+        blueprints.each do |bp|
+          d={
+            :name => bp.name,
+            :description => bp.description,
+            :id => bp.id,
+            :version => bp.version,
+            :group => bp.group,
+            :user => bp.user.full_name,
+            :blueprint_objects => bp.blueprint_objects
+          }
+          data  <<d
+
+        end
+        render json: {'value' => data}
+      }
+      #.where("name LIKE ?", "%#{params[:name]}%")
+    end
   end
 
   # GET /blueprints/1
@@ -24,13 +48,20 @@ class BlueprintsController < ApplicationController
   # POST /blueprints
   # POST /blueprints.json
   def create
-    @blueprint = Blueprint.new(blueprint_params)
+    if params[:name].blank?
+      @blueprint = Blueprint.new(blueprint_params)
 
+    else
+      @blueprint = Blueprint.new(name: params[:name], description: params[:description])
+
+    end
+    @blueprint.user=current_user
     respond_to do |format|
       if @blueprint.save
         format.html { redirect_to @blueprint, notice: 'Blueprint was successfully created.' }
-        format.json { render :show, status: :created, location: @blueprint }
+        format.json { render json: @blueprint }
       else
+        puts  @blueprint.errors.inspect
         format.html { render :new }
         format.json { render json: @blueprint.errors, status: :unprocessable_entity }
       end
@@ -40,11 +71,17 @@ class BlueprintsController < ApplicationController
   # PATCH/PUT /blueprints/1
   # PATCH/PUT /blueprints/1.json
   def update
+    if params[:name].blank?
+      updated=@blueprint.update(blueprint_params)
+    else
+      updated=@blueprint.update(name: params[:name], description: params[:description])
+    end
     respond_to do |format|
-      if @blueprint.update(blueprint_params)
+      if updated
         format.html { redirect_to @blueprint, notice: 'Blueprint was successfully updated.' }
-        format.json { render :show, status: :ok, location: @blueprint }
+        format.json { render json: @blueprint         }
       else
+        puts @blueprint.errors.inspect
         format.html { render :edit }
         format.json { render json: @blueprint.errors, status: :unprocessable_entity }
       end
@@ -62,13 +99,13 @@ class BlueprintsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blueprint
-      @blueprint = Blueprint.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blueprint
+    @blueprint = Blueprint.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def blueprint_params
-      params.require(:blueprint).permit(:name, :description, :version, :user_id, :group)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def blueprint_params
+    params.require(:blueprint).permit(:name, :description, :version, :user_id, :group, blueprint_objects_attributes: [:id, :object_type_id, :catalog_item_id, :blueprint_id, :name, :description,  :_destroy,:version])
+  end
 end

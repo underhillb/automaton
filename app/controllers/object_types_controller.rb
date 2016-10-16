@@ -37,8 +37,9 @@ class ObjectTypesController < ApplicationController
     # DELETE /object_types/1
     # DELETE /object_types/1.json
     def destroy
-      @object_type.destroy
-      render nothing: true, status: 200
+      if @object_type.destroy
+        head :ok
+      end
     end
 
     private

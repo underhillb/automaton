@@ -15,27 +15,19 @@ class ConfigurationDetailTypesController < ApplicationController
       #.where("name LIKE ?", "%#{params[:name]}%")
     end
   end
-  
+
   # GET /configuration_detail_types/1
   # GET /configuration_detail_types/1.json
-  def show
-  end
 
   # GET /configuration_detail_types/new
-  def new
-    @configuration_detail_type = ConfigurationDetailType.new
-  end
-
-  # GET /configuration_detail_types/1/edit
-  def edit
-  end
 
   # POST /configuration_detail_types
   # POST /configuration_detail_types.json
   def create
     data = ConfigurationDetailType.new(name: params[:name], description: params[:description])
-    data.save
+    if data.save
     render json: data
+    end
   end
 
   # PATCH/PUT /configuration_detail_types/1
@@ -51,8 +43,9 @@ class ConfigurationDetailTypesController < ApplicationController
   # DELETE /configuration_detail_types/1
   # DELETE /configuration_detail_types/1.json
   def destroy
-    @configuration_detail_type.destroy
-    render nothing: true, status: 200
+    if @configuration_detail_type.destroy
+      head :ok
+    end
   end
 
   private

@@ -3,10 +3,18 @@ class ConfigurationTemplatesController < ApplicationController
 
   # GET /configuration_templates
   # GET /configuration_templates.json
-  def index
-    @configuration_templates = ConfigurationTemplate.all
-  end
 
+  def index
+    respond_to do |format|
+      puts params.inspect
+      format.html
+      format.json {
+        data= ConfigurationTemplate.all
+        .where("name LIKE ?", "%#{params[:name]}%")
+        .where("description LIKE ?", "%#{params[:description]}%")
+        render json: {'value' => data} }
+      end
+    end
   # GET /configuration_templates/1
   # GET /configuration_templates/1.json
   def show
@@ -24,29 +32,31 @@ class ConfigurationTemplatesController < ApplicationController
   # POST /configuration_templates
   # POST /configuration_templates.json
   def create
-    @configuration_template = ConfigurationTemplate.new(configuration_template_params)
+    data = ConfigurationTemplate.new(name: params[:name], description: params[:description])
+    data.save
+    render json: data
 
-    respond_to do |format|
-      if @configuration_template.save
-        format.html { redirect_to @configuration_template, notice: 'Configuration template was successfully created.' }
-        format.json { render :show, status: :created, location: @configuration_template }
-      else
-        format.html { render :new }
-        format.json { render json: @configuration_template.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /configuration_templates/1
   # PATCH/PUT /configuration_templates/1.json
   def update
+    if params[:name].blank?
+  updated=@configuration_template.update(configuration_template_params)
+else
+  updated=@configuration_template.update(name: params[:name], description: params[:description])
+end
+
     respond_to do |format|
-      if @configuration_template.update(configuration_template_params)
-        format.html { redirect_to @configuration_template, notice: 'Configuration template was successfully updated.' }
-        format.json { render :show, status: :ok, location: @configuration_template }
+      if updated
+        format.html { redirect_to @configuration_template, notice: 'Blueprint was successfully updated.' }
+
+        format.json { render json: @configuration_template }
       else
+        puts @configuration_template.errors.inspect
         format.html { render :edit }
         format.json { render json: @configuration_template.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -54,10 +64,8 @@ class ConfigurationTemplatesController < ApplicationController
   # DELETE /configuration_templates/1
   # DELETE /configuration_templates/1.json
   def destroy
-    @configuration_template.destroy
-    respond_to do |format|
-      format.html { redirect_to configuration_templates_url, notice: 'Configuration template was successfully destroyed.' }
-      format.json { head :no_content }
+    if @configuration_template.destroy
+      head :ok
     end
   end
 
@@ -69,6 +77,7 @@ class ConfigurationTemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configuration_template_params
-      params.require(:configuration_template).permit(:name, :description, :blueprint_objects_id)
+      params.require(:configuration_template).permit(:name, :description, :blueprint_objects_id,configuration_details_attributes: [:id, :configuration_template_id,
+        :configuration_detail_type_id, :configuration_detail_order, :configuration_detail_data,  :_destroy])
     end
 end

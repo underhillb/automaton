@@ -7,24 +7,24 @@ $(function() {
     height: "auto",
     width: "100%",
 
-    filtering: true,
-    inserting: true,
-    editing: true,
+
     sorting: true,
     paging: true,
     autoload: true,
     pageSize: 10,
+    filtering: true,
     deleteConfirm: function(item) {
       return item.name + " will be removed. Are you sure?";
     },
 
     controller: {
-      loadData: function() {
+      loadData: function(filter) {
         var d = $.Deferred();
 
         $.ajax({
           url: "<%=ajax_url%>",
-          dataType: "json"
+          dataType: "json",
+          data: filter,
         }).done(function(response) {
           d.resolve(response.value);
         });
@@ -57,12 +57,20 @@ $(function() {
 
 
     },
-    fields: [
-      { name: "name", type: "text" },
-      { name: "description", type: "textarea", width: 150 },
-      { type: "control" }
 
+      <%if defined?  extra_opt%>
+      <%=raw extra_opt%>
+      <%else%>
+      filtering: true,
+      inserting: true,
+      editing: true,
+          fields: [
+      { name: "name", type: "text", title: "Name" },
+      { name: "description", type: "text",title: "Description" },
+      { type: "control" }
     ]
+    <%end%>
+
 
   });
 

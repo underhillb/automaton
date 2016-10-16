@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require jsgrid
 //= require turbolinks
+//= require cocoon

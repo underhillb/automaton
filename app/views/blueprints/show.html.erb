@@ -1,29 +1,51 @@
 <p id="notice"><%= notice %></p>
+<ul class="list-group">
+  <li class="list-group-item  ">
+    <p>
+      <strong>Blueprint Name:</strong>
+      <%= @blueprint.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @blueprint.name %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @blueprint.description %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @blueprint.description %>
-</p>
+    <p>
+      <strong>Version:</strong>
+      <%= @blueprint.version %>
+    </p>
 
-<p>
-  <strong>Version:</strong>
-  <%= @blueprint.version %>
-</p>
+    <p>
+      <strong>User:</strong>
+      <%= @blueprint.user.full_name %>
+    </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @blueprint.user %>
-</p>
+    <p>
+      <strong>Group:</strong>
+      <%= @blueprint.group %>
+    </p>
+</li>
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>catalog_item</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%@blueprint.blueprint_objects.each  do |bo| %>
 
-<p>
-  <strong>Group:</strong>
-  <%= @blueprint.group %>
-</p>
+<%=raw "<tr><td> #{bo.object_type.name} </td><td> #{bo.catalog_item.name} </td><td> #{bo.name} </td><td> #{bo.description} </tr>"%>
+
+
+<%end%>
+</tbody>
+</table>
+</ul>
+
 
 <%= link_to 'Edit', edit_blueprint_path(@blueprint) %> |
 <%= link_to 'Back', blueprints_path %>

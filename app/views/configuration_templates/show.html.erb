@@ -1,19 +1,40 @@
 <p id="notice"><%= notice %></p>
+<ul class="list-group">
+  <li class="list-group-item  ">
+    <p>
+      <strong>Blueprint Name:</strong>
+      <%= @configuration_template.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @configuration_template.name %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @configuration_template.description %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @configuration_template.description %>
-</p>
 
-<p>
-  <strong>Blueprint objects:</strong>
-  <%= @configuration_template.blueprint_objects %>
-</p>
+
+</li>
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>configure Value</th>
+      <th>Order</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%@configuration_template.configuration_details.each  do |cd| %>
+
+<%=raw "<tr><td> #{cd.configuration_detail_type.name} </td><td> #{cd.configuration_detail_data} </td><td> #{cd.configuration_detail_order} </td>  </tr>"%>
+
+
+<%end%>
+</tbody>
+</table>
+</ul>
+
+
+
 
 <%= link_to 'Edit', edit_configuration_template_path(@configuration_template) %> |
 <%= link_to 'Back', configuration_templates_path %>
