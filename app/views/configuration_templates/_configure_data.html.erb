@@ -3,14 +3,27 @@ configure_format=<%=raw ConfigurationDetailType.all.index_by(&:id).to_json%>;
 console.log(configure_format);
 $(function(){
   $('body').on('click', '.edit_data', function(event) {
-configure_type=get_configure_type(event.target.id);
-$('#enter_configure_data').modal('show');
-create_form(configure_type);
-console.log(configure_type);
+    configure_data_field=event.target
+    configure_type=get_configure_type(event.target.id);
+    $('#enter_configure_data').modal('show');
+    create_form(configure_type);
+    console.log(configure_type);
   });
-  $('body').on('click', '#save_configure_data', function(event) {
+  $('body').on('click', '#save_configure_data', function(e) {
+    if (!e)
+  e = window.event;
 
-console.log("saving data");
+//IE9 & Other Browsers
+if (e.stopPropagation) {
+  e.stopPropagation();
+}
+//IE8 and Lower
+else {
+  e.cancelBubble = true;
+}
+$('#enter_configure_data').modal('hide');
+    configure_data_field.value="hello world";
+    console.log("saving data");
   });
 
 });
@@ -28,36 +41,36 @@ function create_form(configure_type){
 
 
 
-    html_output=' <div class="modal-header">';
-    html_output+='<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
-    html_output+='<h4 class="modal-title" id="myModalLabel">'+configure_type.name+'</h4>';
-    configure_format_json=JSON.parse(configure_format[configure_type.id].configure_format);
+  html_output=' <div class="modal-header">';
+  html_output+='<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+  html_output+='<h4 class="modal-title" id="myModalLabel">'+configure_type.name+'</h4>';
+  configure_format_json=JSON.parse(configure_format[configure_type.id].configure_format);
 
-    html_output+='</div>';
-    html_output+=' <div class="modal-body ">';
-    for(var i = 0; i < configure_format_json.length; i++) {
-        var obj = configure_format_json[i];
-        html_output+='<div class="form-group ">';
+  html_output+='</div>';
+  html_output+=' <div class="modal-body ">';
+  for(var i = 0; i < configure_format_json.length; i++) {
+    var obj = configure_format_json[i];
+    html_output+='<div class="form-group ">';
 
-        if (Array.isArray(obj)){
+    if (Array.isArray(obj)){
 
-          html_output+='<label>' +obj[0]+'</label>';
-          html_output+='<select class="form-control" id="sel1">';
-          for(var ii = 0; ii < obj[1].length; ii++) {
-            html_output+='<option>'+obj[1][ii] +'</option>';
-            console.log(obj[i][1][ii]);
-          }
-            html_output+='</select>';
-        }
-        else {
-          html_output+='<label>' +obj+'</label>';
-          html_output+='<input type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">';
-        }
-        html_output+='</div>';
+      html_output+='<label>' +obj[0]+'</label>';
+      html_output+='<select class="form-control" id="sel1">';
+      for(var ii = 0; ii < obj[1].length; ii++) {
+        html_output+='<option>'+obj[1][ii] +'</option>';
+        console.log(obj[i][1][ii]);
+      }
+      html_output+='</select>';
     }
+    else {
+      html_output+='<label>' +obj+'</label>';
+      html_output+='<input type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">';
+    }
+    html_output+='</div>';
+  }
 
-    html_output+='<a href="#" id=save_configure_data >Save</a>';
-    $("#data").append(html_output);
+  html_output+='<a href="#" id=save_configure_data >Save</a>';
+  $("#data").append(html_output);
 
 
 };
