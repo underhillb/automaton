@@ -1,1 +1,18 @@
-<%= render 'partials/grid', :ajax_url => "configuration_detail_types" %>
+<%
+extra_opt='
+
+filtering: true,
+inserting: true,
+editing: true,
+fields: [
+
+{ name: "name", type: "text",title: "Blueprint" },
+{ name: "description", type: "text",title: "Description" },
+{ name: "configure_format", type: "text",title: "Format(JSON)" },
+
+{ type: "control" }
+
+]'
+%>
+
+<%= render 'partials/grid', :ajax_url => "configuration_detail_types",:extra_opt => extra_opt %>

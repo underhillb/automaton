@@ -1,9 +1,10 @@
 <div class="nested-fields">
   <div class="form-group form-inline">
 
-  <%= f.association :configuration_detail_type,:include_blank => false, label: "Type" %>
+  <%= f.association :configuration_detail_type, label: "Type",
+  input_html: { data: {remote: :true, url: "/configuration_detail_types/format_configure_type"} } %>
 
-  <%= f.input :configuration_detail_data,label: "data" %>
+  <%= f.input :configuration_detail_data,label: "Configure Data",:input_html => { class: "edit_data"} ,:readonly => true %>
 
     <%= f.input :configuration_detail_order,label: "Order" %>
     <%= link_to_remove_association "remove", f %>

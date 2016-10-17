@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015103512) do
+ActiveRecord::Schema.define(version: 20161016195932) do
 
   create_table "blueprint_objects", force: :cascade do |t|
     t.integer  "object_type_id"
@@ -47,8 +47,9 @@ ActiveRecord::Schema.define(version: 20161015103512) do
   create_table "configuration_detail_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "configure_format"
   end
 
   create_table "configuration_details", force: :cascade do |t|

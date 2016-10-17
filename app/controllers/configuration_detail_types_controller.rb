@@ -15,7 +15,14 @@ class ConfigurationDetailTypesController < ApplicationController
       #.where("name LIKE ?", "%#{params[:name]}%")
     end
   end
-
+def format_configure_type
+  puts params.inspect
+  @div,detail_type_hash=params[:configuration_template][:configuration_details_attributes].first
+  detail_type_id=detail_type_hash.values[0]
+  @detail_type=ConfigurationDetailType.find(detail_type_id)
+  @msg="#{@div} is selected, type is #{@detail_type.name}"
+  puts @div
+end
   # GET /configuration_detail_types/1
   # GET /configuration_detail_types/1.json
 
@@ -24,7 +31,7 @@ class ConfigurationDetailTypesController < ApplicationController
   # POST /configuration_detail_types
   # POST /configuration_detail_types.json
   def create
-    data = ConfigurationDetailType.new(name: params[:name], description: params[:description])
+    data = ConfigurationDetailType.new(name: params[:name], description: params[:description],configure_format: params[:configure_format])
     if data.save
     render json: data
     end
@@ -34,7 +41,7 @@ class ConfigurationDetailTypesController < ApplicationController
   # PATCH/PUT /configuration_detail_types/1.json
   def update
     respond_to do |format|
-      if @configuration_detail_type.update(name: params[:name], description: params[:description])
+      if @configuration_detail_type.update(name: params[:name], description: params[:description], configure_format: params[:configure_format])
         format.json { render json: @configuration_detail_type }
       end
     end
@@ -56,6 +63,6 @@ class ConfigurationDetailTypesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def configuration_detail_type_params
-    params.require(:configuration_detail_type).permit(:name, :description)
+    params.require(:configuration_detail_type).permit(:name, :description, :configure_format)
   end
 end

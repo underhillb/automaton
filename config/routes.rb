@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'configuration_detail_types/format_configure_type'
   resources :configuration_detail_types
   resources :configuration_details
   resources :configuration_files

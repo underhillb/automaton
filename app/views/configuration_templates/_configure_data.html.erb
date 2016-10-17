@@ -1,0 +1,68 @@
+<script>
+configure_format=<%=raw ConfigurationDetailType.all.index_by(&:id).to_json%>;
+console.log(configure_format);
+$(function(){
+  $('body').on('click', '.edit_data', function(event) {
+configure_type=get_configure_type(event.target.id);
+$('#enter_configure_data').modal('show');
+create_form(configure_type);
+console.log(configure_type);
+  });
+  $('body').on('click', '#save_configure_data', function(event) {
+
+console.log("saving data");
+  });
+
+});
+
+
+function get_configure_type(dev_id) {
+  type_id=dev_id.replace("configuration_detail_data","configuration_detail_type_id");
+  configure_type={name: $("#"+type_id+" option:selected").text(), id: +$("#"+type_id+" option:selected").val()};
+  return configure_type;
+
+};
+
+function create_form(configure_type){
+  $("#data").empty();
+
+
+
+    html_output=' <div class="modal-header">';
+    html_output+='<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+    html_output+='<h4 class="modal-title" id="myModalLabel">'+configure_type.name+'</h4>';
+    configure_format_json=JSON.parse(configure_format[configure_type.id].configure_format);
+
+    html_output+='</div>';
+    html_output+=' <div class="modal-body ">';
+    for(var i = 0; i < configure_format_json.length; i++) {
+        var obj = configure_format_json[i];
+        html_output+='<div class="form-group ">';
+
+        if (Array.isArray(obj)){
+
+          html_output+='<label>' +obj[0]+'</label>';
+          html_output+='<select class="form-control" id="sel1">';
+          for(var ii = 0; ii < obj[1].length; ii++) {
+            html_output+='<option>'+obj[1][ii] +'</option>';
+            console.log(obj[i][1][ii]);
+          }
+            html_output+='</select>';
+        }
+        else {
+          html_output+='<label>' +obj+'</label>';
+          html_output+='<input type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">';
+        }
+        html_output+='</div>';
+    }
+
+    html_output+='<a href="#" id=save_configure_data >Save</a>';
+    $("#data").append(html_output);
+
+
+};
+
+
+
+
+</script>

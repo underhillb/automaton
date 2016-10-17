@@ -1,20 +1,4 @@
 <%= simple_form_for(@configuration_template) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%# f.association :blueprint_objects %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
-
-
-
-<%= simple_form_for(@configuration_template) do |f| %>
 <div class="container">
   <%= f.error_notification %>
 
@@ -28,17 +12,36 @@
   <div class="form-actions">
     <%= f.button :submit, "Save template" %>
     <%= link_to_add_association 'add configure', f, :configuration_details, "data-association-insertion-method" => :append, :class => "btn btn-default" %>
-<hr>
+    <hr>
   </div>
 
   <div   id="configuration_details">
-  <%= f.simple_fields_for :configuration_details do |configuration_detail| %>
+    <%= f.simple_fields_for :configuration_details do |configuration_detail| %>
 
     <%= render 'configuration_detail_fields', f: configuration_detail %>
 
+    <% end %>
+  </div>
+  <hr>
+
   <% end %>
 </div>
-<hr>
 
-<% end %>
+<div class="container">
+	<div class="row">
+
+        <div class="modal fade" id="enter_configure_data" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content" >
+              <div id=data>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+	</div>
 </div>
+<%=render partial: "configure_data"%>
