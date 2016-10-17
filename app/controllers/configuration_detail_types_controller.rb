@@ -41,7 +41,7 @@ end
   # PATCH/PUT /configuration_detail_types/1.json
   def update
     respond_to do |format|
-      if @configuration_detail_type.update(name: params[:name], description: params[:description], configure_format: params[:configure_format])
+      if @configuration_detail_type.update(name: params[:name], description: params[:description], configure_format: params[:cofigure_format])
         format.json { render json: @configuration_detail_type }
       end
     end

@@ -106,6 +106,6 @@ class BlueprintsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def blueprint_params
-    params.require(:blueprint).permit(:name, :description, :version, :user_id, :group, blueprint_objects_attributes: [:id, :object_type_id, :catalog_item_id, :blueprint_id, :name, :description,  :_destroy,:version])
+    params.require(:blueprint).permit(:name, :description, :version, :user_id, :group, blueprint_objects_attributes: [:id, :configuration_template_id,:configuration_file_id, :object_type_id, :catalog_item_id, :blueprint_id, :name, :description,  :_destroy,:version])
   end
 end

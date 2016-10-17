@@ -10,6 +10,7 @@ class ConfigurationFilesController < ApplicationController
   # GET /configuration_files/1
   # GET /configuration_files/1.json
   def show
+    puts @configuration_file.file_content
   end
 
   # GET /configuration_files/new

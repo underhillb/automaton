@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016195932) do
+ActiveRecord::Schema.define(version: 20161017064736) do
 
   create_table "blueprint_objects", force: :cascade do |t|
     t.integer  "object_type_id"
@@ -19,10 +19,14 @@ ActiveRecord::Schema.define(version: 20161016195932) do
     t.string   "name"
     t.text     "description"
     t.integer  "version"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "configuration_template_id"
+    t.integer  "configuration_file_id"
     t.index ["blueprint_id"], name: "index_blueprint_objects_on_blueprint_id"
     t.index ["catalog_item_id"], name: "index_blueprint_objects_on_catalog_item_id"
+    t.index ["configuration_file_id"], name: "index_blueprint_objects_on_configuration_file_id"
+    t.index ["configuration_template_id"], name: "index_blueprint_objects_on_configuration_template_id"
     t.index ["object_type_id"], name: "index_blueprint_objects_on_object_type_id"
   end
 
@@ -84,6 +88,14 @@ ActiveRecord::Schema.define(version: 20161016195932) do
   create_table "object_types", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "sudos", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "sudo_rule"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

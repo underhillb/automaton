@@ -1,0 +1,1 @@
+json.partial! "sudos/sudo", sudo: @sudo

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :sudos
   get 'configuration_detail_types/format_configure_type'
+  get 'configuration_templates/versions'
   resources :configuration_detail_types
   resources :configuration_details
   resources :configuration_files

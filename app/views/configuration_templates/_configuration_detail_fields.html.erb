@@ -6,7 +6,7 @@
 
   <%= f.input :configuration_detail_data,label: "Configure Data",:input_html => { class: "edit_data"} ,:readonly => true %>
 
-    <%= f.input :configuration_detail_order,label: "Order" %>
+    <%= f.input :configuration_detail_order,label: "Order",  input_html: {value: f.object.configuration_detail_order || 1}%>
     <%= link_to_remove_association "remove", f %>
   </div>
 </div>

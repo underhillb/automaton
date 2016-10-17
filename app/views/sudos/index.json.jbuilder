@@ -1,0 +1,1 @@
+json.array! @sudos, partial: 'sudos/sudo', as: :sudo

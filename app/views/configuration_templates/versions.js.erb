@@ -1,0 +1,8 @@
+selected_div=$('#blueprint_blueprint_objects_attributes_<%=@div%>_configuration_file_id');
+selected_div.empty();//remove all previous majors
+<%@versions.each do |v|%>
+        selected_div.append(//add in an option for each major
+          '<option value=<%=v.id%>><%=v.version%></option>'
+
+        );
+<%end%>

@@ -6,7 +6,13 @@
     <div class="panel-body">
   <%= f.association :object_type,:include_blank => false %>
   <%= f.association :catalog_item,:include_blank => false %>
+  <%= f.association :configuration_template,:include_blank => false,  input_html: { data: {remote: :true, url: "/configuration_templates/versions"} } %>
+<%if  f.object.configuration_template.blank?%>
+<%= f.association :configuration_file ,:include_blank => false %>
 
+<%else%>
+  <%= f.association :configuration_file,collection: f.object.configuration_template.configuration_files ,label_method: :version,:include_blank => false %>
+<%end%>
   <%= f.input :name %>
 
     <%= f.input :description %>

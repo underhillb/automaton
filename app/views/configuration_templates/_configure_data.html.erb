@@ -11,18 +11,26 @@ $(function(){
   });
   $('body').on('click', '#save_configure_data', function(e) {
     if (!e)
-  e = window.event;
+    e = window.event;
 
-//IE9 & Other Browsers
-if (e.stopPropagation) {
-  e.stopPropagation();
-}
-//IE8 and Lower
-else {
-  e.cancelBubble = true;
-}
-$('#enter_configure_data').modal('hide');
-    configure_data_field.value="hello world";
+    //IE9 & Other Browsers
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+    //IE8 and Lower
+    else {
+      e.cancelBubble = true;
+    }
+    $('#enter_configure_data').modal('hide');
+    configure_data="";
+    var elements = document.getElementById("configure_data_form").elements;
+    for(var i = 0 ; i < elements.length ; i++){
+      var item = elements.item(i);
+      configure_data+= ":"+item.value;
+    }
+
+    configure_data_field.value=configure_data.substring(1);
+
     console.log("saving data");
   });
 
@@ -48,6 +56,8 @@ function create_form(configure_type){
 
   html_output+='</div>';
   html_output+=' <div class="modal-body ">';
+  html_output+=' <form id=configure_data_form ">';
+
   for(var i = 0; i < configure_format_json.length; i++) {
     var obj = configure_format_json[i];
     html_output+='<div class="form-group ">';
@@ -70,6 +80,8 @@ function create_form(configure_type){
   }
 
   html_output+='<a href="#" id=save_configure_data >Save</a>';
+  html_output+=' </form">';
+
   $("#data").append(html_output);
 
 

@@ -1,0 +1,2 @@
+class Sudo < ApplicationRecord
+end

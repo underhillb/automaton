@@ -1,0 +1,19 @@
+class ConfigurationTemplate < ApplicationRecord
+  has_many :configuration_details
+  accepts_nested_attributes_for :configuration_details, allow_destroy: true
+  after_save :create_yaml
+
+protected
+
+def create_yaml
+  puts "checking if Configure has changed"
+  output=[]
+  self.configuration_details.each do |data|
+    output <<"#{data.configuration_detail_order}:#{data.configuration_detail_type.name}:#{data.configuration_detail_data}\n"
+  end
+   yaml_output=output.sort!.join
+   self.odometers.max(:mileage)
+
+
+end
+end

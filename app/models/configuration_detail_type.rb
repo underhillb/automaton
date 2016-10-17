@@ -1,2 +1,3 @@
 class ConfigurationDetailType < ApplicationRecord
+has_many :configuration_detail_data
 end

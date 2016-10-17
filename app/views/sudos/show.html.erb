@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sudo.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @sudo.description %>
+</p>
+
+<p>
+  <strong>Sudo rule:</strong>
+  <%= @sudo.sudo_rule %>
+</p>
+
+<%= link_to 'Edit', edit_sudo_path(@sudo) %> |
+<%= link_to 'Back', sudos_path %>

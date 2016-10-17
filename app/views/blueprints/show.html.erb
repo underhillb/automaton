@@ -33,12 +33,17 @@
       <th>catalog_item</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Configure template</th>
+      <th>Version</th>
     </tr>
   </thead>
   <tbody>
   <%@blueprint.blueprint_objects.each  do |bo| %>
 
-<%=raw "<tr><td> #{bo.object_type.name} </td><td> #{bo.catalog_item.name} </td><td> #{bo.name} </td><td> #{bo.description} </tr>"%>
+<%=raw "<tr><td> #{bo.object_type.name} </td><td> #{bo.catalog_item.name} </td><td> #{bo.name} </td><td> #{bo.description} </td>
+<td> #{bo.configuration_template.name} </td><td> #{bo.configuration_file.version} </td>
+
+</tr>"%>
 
 
 <%end%>
